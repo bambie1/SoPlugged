@@ -19,14 +19,8 @@ jobs:
           node-version: '12'
       - run: npm ci
       - run: npm run build
-      - env:
-          CI: false
-      - name: GitHub Action for Firebase
-        uses: w9jds/firebase-action@master
-        with:
-          args: deploy --project=prod
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          CI: false
           REACT_APP_API_KEY: ${{ secrets.FB_API }}
           REACT_APP_AUTH_DOMAIN: ${{ secrets.FB_AUTH_DOMAIN }}
           REACT_APP_PROJECT_ID: ${{ secrets.FB_PROJECT_ID }}
@@ -37,4 +31,10 @@ jobs:
           REACT_APP_GOOGLE_API_KEY: ${{ secrets.GOOGLE_API }}
           REACT_APP_SERVER_ONE_BUSINESS: ${{ secrets.SERVER_ONE }}
           REACT_APP_SERVER_ALL_BUSINESSES: ${{ secrets.SERVER_ALL }}
+      - name: GitHub Action for Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --project=prod
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
     
