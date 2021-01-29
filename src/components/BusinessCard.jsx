@@ -104,15 +104,17 @@ const BusinessCard = ({ mini, ...props }) => {
             >
               <a href={`mailto:${email}`}>Contact</a>
             </Button>
-            <Button
-              color="primary"
-              variant="outlined"
-              className={classes.button}
-            >
-              <a href={`http://${business_url}`} target="__blank">
-                Business Site
-              </a>
-            </Button>
+            {business_url && (
+              <Button
+                color="primary"
+                variant="outlined"
+                className={classes.button}
+              >
+                <a href={`http://${business_url}`} target="__blank">
+                  Business Site
+                </a>
+              </Button>
+            )}
           </div>
         </>
       )}
