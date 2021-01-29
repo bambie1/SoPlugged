@@ -1,0 +1,36 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Firebase Deploy
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+      - run: npm ci
+      - run: npm run build
+      - name: GitHub Action for Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --project=prod
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          REACT_APP_API_KEY: ${{ secrets.FB_API }}
+          REACT_APP_AUTH_DOMAIN: ${{ secrets.FB_AUTH_DOMAIN }}
+          REACT_APP_PROJECT_ID: ${{ secrets.FB_PROJECT_ID }}
+          REACT_APP_STORAGE_BUCKET: ${{ secrets.FB_STORAGE_BUCKET }}
+          REACT_APP_MSG_SENDER_ID: ${{ secrets.FB_MSG_ID }}
+          REACT_APP_APP_ID: ${{ secrets.FB_APP_ID }}
+          REACT_APP_URL: ${{ secrets.FB_URL }}
+          REACT_APP_GOOGLE_API_KEY: ${{ secrets.GOOGLE_API }}
+          REACT_APP_SERVER_ONE_BUSINESS: ${{ secrets.SERVER_ONE }}
+          REACT_APP_SERVER_ALL_BUSINESSES: ${{ secrets.SERVER_ALL }}
+    
