@@ -18,7 +18,6 @@ import { useAuth } from "./contexts/AuthContext";
 import { auth } from "./firebase/firebase.utils";
 import DirectoryPage from "./pages/DirectoryPage";
 import UnknownUrl from "./pages/UnknownUrl";
-import ErrorBoundary from "./components/ErrorBoundary";
 import ProtectedRoute from "./react-router/ProtectedRoute";
 
 function App() {
