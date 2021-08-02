@@ -1,18 +1,12 @@
 import React from "react";
 import FormikCheckbox from "./FormikCheckbox";
 import FormikTextField from "./FormikTextField";
-import LocationSearch from "../LocationSearch";
 
 const BusinessFormStep1 = () => {
   return (
     <>
       <FormikTextField name="businessName" label="Name of Business" required />
-      <LocationSearch
-        label="Location of Business"
-        name="businessLocation"
-        variant="outlined"
-        margin="normal"
-      />
+
       <FormikTextField
         name="streetAddress"
         label="Street Address"

@@ -1,31 +1,6 @@
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  makeStyles,
-  Typography,
-  useMediaQuery,
-  FormControlLabel,
-  Checkbox,
-  FormGroup,
-  TextField,
-} from "@material/mui-components";
-import { Autocomplete } from "@material/mui-lab";
-import { useTheme } from "@material-ui/core/styles";
+import React, { useEffect, useState } from "react";
 import { useBusinessFormContext } from "@contexts/businessFormContext";
-
-const useStyles = makeStyles((theme) => ({
-  dialog: {
-    "& > .MuiBackdrop-root": {
-      backdropFilter: "blur(3px)",
-      backgroundColor: "rgb(86 86 86 / 67%)",
-    },
-  },
-}));
 
 const referralSources = [
   { label: "A business referred me", value: "Business" },
@@ -36,22 +11,18 @@ const referralSources = [
 ];
 
 export default function BusinessTermsConditions({ handleAgree }) {
-  const [open, setOpen] = React.useState(true);
-  const [isBlackOwner, setIsBlackOwner] = React.useState(false);
-  const [isCanadianBusiness, setIsCanadianBusiness] = React.useState(false);
-  const [hasAgreedToTerms, setHasAgreedToTerms] = React.useState(false);
-  const [referralSource, setReferralSource] = React.useState(null);
-  const [referringBusiness, setReferringBusiness] = React.useState(null);
-  const [inputValue, setInputValue] = React.useState("");
-  const [referringBusinessInput, setReferringBusinessInput] =
-    React.useState("");
-  const [businesses, setBusinesses] = React.useState([]);
+  const [open, setOpen] = useState(true);
+  const [isBlackOwner, setIsBlackOwner] = useState(false);
+  const [isCanadianBusiness, setIsCanadianBusiness] = useState(false);
+  const [hasAgreedToTerms, setHasAgreedToTerms] = useState(false);
+  const [referralSource, setReferralSource] = useState(null);
+  const [referringBusiness, setReferringBusiness] = useState(null);
+  const [inputValue, setInputValue] = useState("");
+  const [referringBusinessInput, setReferringBusinessInput] = useState("");
+  const [businesses, setBusinesses] = useState([]);
   const { setBackEndReferral, setBackEndReferralBusiness } =
     useBusinessFormContext();
-  const classes = useStyles();
   const router = useRouter();
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleClose = (prop) => {
     if (prop == "accepted") {
@@ -75,159 +46,65 @@ export default function BusinessTermsConditions({ handleAgree }) {
   }, [referralSource]);
 
   return (
-    <Dialog
-      open={open}
-      onClose={handleClose}
-      aria-labelledby="alert-dialog-title"
-      aria-describedby="alert-dialog-description"
-      className={classes.dialog}
-      scroll="paper"
-      maxWidth="md"
-      fullScreen={fullScreen}
-    >
-      <DialogTitle id="alert-dialog-title">
-        {"Welcome to SoPlugged"}
-      </DialogTitle>
-      <DialogContent>
-        <Typography variant="body2" gutterBottom={true}>
+    <div>
+      <h5>Welcome to SoPlugged</h5>
+      <div>
+        <p>
           The purpose of SoPlugged is to increase brand awareness of Black-owned
           businesses across Canada. We strive to provide a platform that
           connects end-users looking to #buyblack to the perfect business that
           meets their needs.{" "}
-        </Typography>
-        <Typography variant="body2" gutterBottom={true}>
+        </p>
+        <p>
           In order to maintain a respectful, inclusive, and safe environment for
           everyone, we’ve created a set of community guidelines to serve as a
           moral compass for behavior on our platform, define what is acceptable
           in the SoPlugged community, and explain how violations are enforced.
           They aren’t tied to any law, rather they reflect our expectations and
           are rooted in our mission to support the Black community in Canada!
-        </Typography>
-        <Typography variant="body2" gutterBottom={true}>
+        </p>
+        <p>
           We want to create the best experience for all community members, and
           ask that you respect and follow these guidelines:
-        </Typography>
+        </p>
         <ul>
           <li>
-            <Typography variant="body2">
+            <p>
               Business registration on SoPlugged is solely reserved for Black
               entrepreneurs in Canada.
-            </Typography>
+            </p>
           </li>
           <li>
-            <Typography variant="body2">
+            <p>
               As you respond to potential customers, communicate respectfully.
               There will be zero tolerance for bullying.
-            </Typography>
+            </p>
           </li>
           <li>
-            <Typography variant="body2">
+            <p>
               Do not post any pictures or content that could be considered
               defamatory, indecent, hateful, racist, xenophobic, homophobic,
               sexist, disgraceful, vulgar, or inappropriate.
-            </Typography>
+            </p>
           </li>
           <li>
-            <Typography variant="body2">
+            <p>
               Respect the privacy and personal information of other community
               members.
-            </Typography>
+            </p>
           </li>
         </ul>
 
-        <Typography
-          variant="body2"
-          gutterBottom={true}
+        <p
           style={{
             paddingTop: "16px",
             borderTop: "1px solid",
           }}
         >
           <strong>AGREEMENT:</strong> Please fill out the following
-        </Typography>
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={isBlackOwner}
-                onChange={(e) => setIsBlackOwner(e.target.checked)}
-                name="isBlackOwner"
-              />
-            }
-            label="I am a black entrepreneur"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={isCanadianBusiness}
-                onChange={(e) => setIsCanadianBusiness(e.target.checked)}
-                name="isCanadianBusiness"
-              />
-            }
-            label="I currently reside in Canada"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={hasAgreedToTerms}
-                onChange={(e) => setHasAgreedToTerms(e.target.checked)}
-                name="hasAgreedToTerms"
-              />
-            }
-            label="I will adhere to the Community Guidelines"
-          />
-          <Autocomplete
-            id="referral-source"
-            value={referralSource}
-            onChange={(event, newValue) => {
-              setReferralSource(newValue);
-              setBackEndReferral(newValue?.value);
-            }}
-            inputValue={inputValue}
-            onInputChange={(event, newInputValue) => {
-              setInputValue(newInputValue);
-            }}
-            options={referralSources}
-            getOptionLabel={(option) => option.label}
-            style={{ maxWidth: 400, marginBottom: "16px", marginTop: "16px" }}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="How did you hear about us?"
-                variant="outlined"
-                required
-              />
-            )}
-          />
-          {referralSource?.value == "Business" && (
-            <Autocomplete
-              id="business-referral"
-              value={referringBusiness}
-              onChange={(event, newValue) => {
-                setReferringBusiness(newValue);
-                setBackEndReferralBusiness(newValue?.slug);
-              }}
-              inputValue={referringBusinessInput}
-              onInputChange={(event, newInputValue) => {
-                setReferringBusinessInput(newInputValue);
-              }}
-              options={businesses}
-              getOptionLabel={(option) => option.business_name}
-              style={{ maxWidth: 400, marginBottom: "16px" }}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Name of Business that referred you"
-                  variant="outlined"
-                  required
-                />
-              )}
-            />
-          )}
-        </FormGroup>
-        <Typography
-          variant="body2"
-          gutterBottom={true}
+        </p>
+
+        <p
           style={{
             paddingTop: "16px",
             borderTop: "1px solid",
@@ -239,15 +116,12 @@ export default function BusinessTermsConditions({ handleAgree }) {
           it means revoking certain privileges or removing your business from
           our site. We ask that all community members reach out to a member of
           our team to report any actions that violate these guidelines.
-        </Typography>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={() => handleClose("rejected")} color="primary">
-          Cancel
-        </Button>
-        <Button
+        </p>
+      </div>
+      <div>
+        <button onClick={() => handleClose("rejected")}>Cancel</button>
+        <button
           onClick={() => handleClose("accepted")}
-          color="primary"
           disabled={
             !(
               isBlackOwner &&
@@ -258,11 +132,10 @@ export default function BusinessTermsConditions({ handleAgree }) {
             )
           }
           autoFocus
-          variant="contained"
         >
           Agree
-        </Button>
-      </DialogActions>
-    </Dialog>
+        </button>
+      </div>
+    </div>
   );
 }

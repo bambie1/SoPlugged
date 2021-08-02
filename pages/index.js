@@ -1,5 +1,4 @@
 import React from "react";
-import { Typography, Button, Grid, Box } from "@material/mui-components";
 import Link from "next/link";
 import HeroBanner from "@components/HeroBanner";
 import SEO from "@components/SEO";
@@ -23,32 +22,26 @@ export default function Home() {
       <main className={styles.main}>
         <HeroBanner />
         <div className={styles.body_content}>
-          <Box mb={5}>
-            <Grid
-              container
-              spacing={2}
-              className={`${styles.benefits_grid} ${styles.second}`}
-            >
-              <Grid item xs={12} md={6}>
-                <Typography variant="h2">Want to #BuyBlack?</Typography>
-                <Typography variant="body1">
+          <div>
+            <div className={`${styles.benefits_div} ${styles.second}`}>
+              <div>
+                <h2>Want to #BuyBlack?</h2>
+                <p>
                   We have businesses based in Ottawa, Toronto, and across Canada
                   that you can choose from. Whether you're looking for a hair
                   stylist or a caterer for your next event, we've got you
                   covered. Once you find a business you like, you can contact
                   them directly on our platform, or through their preferred
                   means of communication.
-                </Typography>
+                </p>
                 <br></br>
                 <Link href="/search">
                   <a>
-                    <Button variant="contained" color="secondary">
-                      Find a Business
-                    </Button>
+                    <button>Find a Business</button>
                   </a>
                 </Link>
-              </Grid>
-              <Grid item xs={12} md={6}>
+              </div>
+              <div>
                 <Image
                   placeholder="blur"
                   src="/images/search_businesses_tiny.png"
@@ -57,15 +50,15 @@ export default function Home() {
                   alt="Search for businesses"
                   priority
                 />
-              </Grid>
-            </Grid>
-          </Box>
-          <Box mt={5} mb={5} textAlign="center">
+              </div>
+            </div>
+          </div>
+          <div>
             <TopCategories />
-          </Box>
-          <Box mt={5} mb={5}>
-            <Grid container spacing={2} className={`${styles.benefits_grid} `}>
-              <Grid item xs={12} md={6}>
+          </div>
+          <div>
+            <div className={`${styles.benefits_div} `}>
+              <div>
                 <Image
                   placeholder="blur"
                   src="/images/add_business.png"
@@ -74,58 +67,50 @@ export default function Home() {
                   alt="Add a business"
                   priority
                 />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Typography variant="h2">Want to add your business?</Typography>
-                <Typography variant="body1">
+              </div>
+              <div>
+                <h2>Want to add your business?</h2>
+                <p>
                   You can do so for <u>FREE!</u> Simply click the 'JOIN' button
                   to register, and follow the instructions to add your business
                   to our directory. Once complete, you can begin to field
                   quotesand requests through your preferred means of
                   communication.
-                </Typography>
+                </p>
                 <br></br>
                 <Link href="/my-business">
                   <a>
-                    <Button variant="contained" color="secondary">
-                      Add your Business
-                    </Button>
+                    <button>Add your Business</button>
                   </a>
                 </Link>
-              </Grid>
-            </Grid>
-          </Box>
+              </div>
+            </div>
+          </div>
 
           <DynamicShopifyCollection />
-          <Box mb={5}>
-            <Grid
-              container
-              spacing={2}
-              className={`${styles.benefits_grid} ${styles.second}`}
-            >
-              <Grid item xs={12} md={6}>
-                <Typography variant="h2">Become a Sponsor</Typography>
-                <Typography>
+          <div>
+            <div className={`${styles.benefits_div} ${styles.second}`}>
+              <div>
+                <h2>Become a Sponsor</h2>
+                <p>
                   At SoPlugged, our biggest inspiration is supporting one
                   another and growing our community. Our goal is to normalize
                   buying black and we rely on amazing people like you to keep
                   our platform free and accessible to Black-owned businesses
                   across Canada.
-                </Typography>
-                <Typography variant="body2" className={styles.subText}>
+                </p>
+                <p className={styles.subText}>
                   All donations go towards maintaining our platform and
                   supporting Black-owned businesses across Canada.
-                </Typography>
+                </p>
                 <br></br>
                 <Link href="/sponsors">
                   <a>
-                    <Button variant="contained" color="secondary">
-                      Show your support
-                    </Button>
+                    <button>Show your support</button>
                   </a>
                 </Link>
-              </Grid>
-              <Grid item xs={12} md={6}>
+              </div>
+              <div>
                 <Image
                   placeholder="blur"
                   src="/images/support_team.png"
@@ -134,9 +119,9 @@ export default function Home() {
                   height={400}
                   priority
                 />
-              </Grid>
-            </Grid>
-          </Box>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
     </>

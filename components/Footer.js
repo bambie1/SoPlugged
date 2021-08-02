@@ -1,11 +1,3 @@
-import {
-  Typography,
-  Container,
-  Grid,
-  Button,
-  IconButton,
-} from "@material/mui-components";
-import { InstagramIcon, LinkedInIcon } from "@material/mui-icons";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "styles/Footer.module.scss";
@@ -36,31 +28,27 @@ const Footer = () => {
         </svg>
       </div>
       <SubscribeForm />
-      <Container className={styles.footer_container}>
-        <Grid container>
-          <Grid item xs={12} sm={6} className={styles.grid}>
+      <div className={styles.footer_container}>
+        <div>
+          <div className={styles.grid}>
             <a href="mailto:hello@soplugged.com">
-              <Typography>hello@soplugged.com</Typography>
+              <p>hello@soplugged.com</p>
             </a>
-            <Typography style={{ paddingTop: "8px" }}>Follow Us:</Typography>
+            <p style={{ paddingTop: "8px" }}>Follow Us:</p>
             <div className="social-media">
               <a
                 href="https://www.instagram.com/sopluggd/"
                 target="_blank"
                 rel="noopener"
               >
-                <IconButton aria-label="instagram" edge="start">
-                  <InstagramIcon />
-                </IconButton>
+                IG
               </a>
               <a
                 href="https://www.linkedin.com/company/soplugged/"
                 target="_blank"
                 rel="noopener"
               >
-                <IconButton aria-label="linkedin">
-                  <LinkedInIcon />
-                </IconButton>
+                LinkedIn
               </a>
             </div>
 
@@ -70,17 +58,17 @@ const Footer = () => {
               rel="noopener"
               style={{ display: "block" }}
             >
-              <Button variant="outlined" color="secondary">
+              <button variant="outlined" color="secondary">
                 Make a feature request
-              </Button>
+              </button>
             </a>
-          </Grid>
+          </div>
 
-          <Grid item xs={12} sm={6} className={styles.footer_links_div}>
+          <div item xs={12} sm={6} className={styles.footer_links_div}>
             <div>
               <Link href="/faqs">
                 <a>
-                  <Button>FAQs</Button>
+                  <button>FAQs</button>
                 </a>
               </Link>
             </div>
@@ -88,7 +76,7 @@ const Footer = () => {
             <div>
               <Link href="https://soplugged.medium.com/">
                 <a target="_blank" rel="noopener">
-                  <Button>BLOG</Button>
+                  <button>BLOG</button>
                 </a>
               </Link>
             </div>
@@ -96,7 +84,7 @@ const Footer = () => {
             <div>
               <Link href="/our-story">
                 <a>
-                  <Button>ABOUT US</Button>
+                  <button>ABOUT US</button>
                 </a>
               </Link>
             </div>
@@ -104,34 +92,34 @@ const Footer = () => {
             <div>
               <Link href="/sponsors">
                 <a>
-                  <Button variant="outlined" color="secondary">
+                  <button variant="outlined" color="secondary">
                     Sponsors
-                  </Button>
+                  </button>
                 </a>
               </Link>
             </div>
-          </Grid>
-        </Grid>
+          </div>
+        </div>
         <br></br>
         <br></br>
-        <Typography variant="body2">
+        <p variant="body2">
           Copyright&copy; {new Date().getFullYear()}, SoPlugged
-        </Typography>
+        </p>
         <a
           href="https://docs.google.com/document/d/1lq7Be0U3GTswo3kCZ2tHvZ20J_eJbqhQX3XiKAjih20/edit?usp=sharing"
           target="_blank"
           rel="noopener"
         >
-          <Button>Privacy Policy</Button>
+          <button>Privacy Policy</button>
         </a>
         <a
           href="https://docs.google.com/document/d/1l5OVYw8_WuVmhQDXkXdB7zBRYiLVhJ-lrGERdMQXlcc/edit?usp=sharing"
           target="_blank"
           rel="noopener"
         >
-          <Button>Community Guidelines</Button>
+          <button>Community Guidelines</button>
         </a>
-      </Container>
+      </div>
     </footer>
   );
 };

@@ -1,6 +1,5 @@
 import React from "react";
 import { Highlight, connectRefinementList } from "react-instantsearch-dom";
-import { Typography, Button } from "@material/mui-components";
 import * as styles from "styles/AlgoliaSearch.module.scss";
 
 const ITEMS_LIMIT = 5;
@@ -40,15 +39,14 @@ const RefinementList = ({
                   ) : (
                     item.label
                   )}{" "}
-                  {/* <span className={classes.numBadge}>{item.count}</span> */}
                 </a>
               </li>
             )
         )}
         {items.length > ITEMS_LIMIT && (
-          <Button size="small" onClick={() => setExtended(!extended)}>
+          <button onClick={() => setExtended(!extended)}>
             {extended ? "Show Less" : "Show More"}
-          </Button>
+          </button>
         )}
       </ul>
     </>

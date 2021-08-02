@@ -1,13 +1,5 @@
 import React, { useCallback, useState, useEffect, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
-import {
-  Button,
-  Typography,
-  makeStyles,
-  Avatar,
-  CircularProgress,
-} from "@material/mui-components";
-import { CloudUploadIcon } from "@material/mui-icons";
 import useImageUploader from "@hooks/useImageUploader";
 import { useFormikContext } from "formik";
 import { useBusinessFormContext } from "@contexts/businessFormContext";
@@ -66,9 +58,7 @@ const acceptStyle = {
 const rejectStyle = {
   borderColor: "#ff1744",
 };
-const useStyles = makeStyles((theme) => ({
-  dropZone: { cursor: "default !important" },
-}));
+
 const MAX_FILES = 3; //file upload limit
 
 const FileDropzone = () => {
@@ -78,7 +68,6 @@ const FileDropzone = () => {
     currentImages = values.sampleImages.split(",");
   const [myFiles, setMyFiles] = useState(currentImages);
   const [errorMessage, setErrorMessage] = useState("");
-  const classes = useStyles();
   const [url, error, uploadImage, uploading] = useImageUploader();
   const { setFormWasChanged } = useBusinessFormContext();
 
@@ -143,7 +132,7 @@ const FileDropzone = () => {
     return (
       <React.Fragment key={index}>
         <div style={thumb} key={index}>
-          <Avatar src={file} alt="" />
+          {/* <Avatar src={file} alt="" /> */}
           <button type="button" onClick={removeFile(file)} style={removeBtn}>
             x
           </button>
@@ -171,23 +160,13 @@ const FileDropzone = () => {
 
   return (
     <>
-      <div {...getRootProps({ style })} className={classes.dropZone}>
+      <div {...getRootProps({ style })}>
         <input {...getInputProps()} />
-        <Typography variant="body2">
-          Upload up to 3 images to showcase your services to customers.
-        </Typography>
+        <p>Upload up to 3 images to showcase your services to customers.</p>
         <br></br>
-        <Button
-          variant="outlined"
-          color="secondary"
-          startIcon={
-            uploading ? <CircularProgress size="1rem" /> : <CloudUploadIcon />
-          }
-          disabled={uploading}
-          onClick={open}
-        >
+        <button disabled={uploading} onClick={open}>
           Click to upload images
-        </Button>
+        </button>
       </div>
 
       {files.length > 0 && (
@@ -195,24 +174,18 @@ const FileDropzone = () => {
           <aside style={thumbsContainer}>
             {files}
 
-            <Button
-              type="button"
+            <button
               onClick={removeAll}
               style={{ alignSelf: "center", marginLeft: "8px" }}
-              variant="outlined"
-              color="secondary"
-              size="small"
             >
               Remove All
-            </Button>
+            </button>
           </aside>
         </>
       )}
       {(fileRejections.length !== 0 || errorMessage) && (
         <aside>
-          <Typography variant="caption" color="error">
-            {errorMessage}
-          </Typography>
+          <p>{errorMessage}</p>
         </aside>
       )}
     </>

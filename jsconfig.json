@@ -4,8 +4,7 @@
     "paths": {
       "@components/*": ["components/*"],
       "@hooks/*": ["hooks/*"],
-      "@contexts/*": ["contexts/*"],
-      "@material/*": ["components/material-ui/*"]
+      "@contexts/*": ["contexts/*"]
     }
   }
 }

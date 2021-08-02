@@ -1,15 +1,4 @@
-import {
-  Button,
-  Snackbar,
-  IconButton,
-  Tooltip,
-} from "@material/mui-components";
-import React, { useState } from "react";
-import {
-  FavoriteBorderIcon,
-  FavoriteIcon,
-  CloseIcon,
-} from "@material/mui-icons";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { addFavorite, removeFavorite } from "src/addRemoveFavorite";
 import { useRouter } from "next/router";
@@ -30,7 +19,7 @@ const FavoriteButton = ({
   const router = useRouter();
 
   let userLikedBusiness = false;
-  React.useEffect(() => {
+  useEffect(() => {
     let token = user?.za || null;
     if (token) {
       fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/favorites`, {
@@ -51,15 +40,15 @@ const FavoriteButton = ({
 
   const [liked, setLiked] = useState(userLikedBusiness);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setLiked(userLikedBusiness);
   }, [userLikedBusiness]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setLikes(numberOfLikes);
   }, [numberOfLikes]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (snackPack.length && !messageInfo) {
       setMessageInfo({ ...snackPack[0] });
       setSnackPack((prev) => prev.slice(1));
@@ -104,67 +93,27 @@ const FavoriteButton = ({
   };
   return (
     <>
-      <Tooltip title={liked ? "Remove from Favorites" : "Add to Favorites"}>
-        <span style={{ marginLeft: mini ? "auto" : "initial" }}>
-          {likes > 0 ? (
-            <Button
-              size={mini ? "small" : "medium"}
-              variant={mini ? "text" : "outlined"}
-              color="secondary"
-              startIcon={liked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-              onClick={handleClick}
-              style={{
-                marginTop: mini ? "auto" : "8px",
-              }}
-            >
-              {mini ? likes : `Likes - ${likes} `}
-            </Button>
-          ) : (
-            <Button
-              size={mini ? "small" : "medium"}
-              variant={mini ? "text" : "outlined"}
-              color="secondary"
-              startIcon={liked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-              onClick={handleClick}
-              style={{ marginTop: mini ? "auto" : "8px" }}
-            >
-              -
-            </Button>
-          )}
-        </span>
-      </Tooltip>
-
-      <Snackbar
-        key={messageInfo ? messageInfo.key : undefined}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-        open={open}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        onExited={handleExited}
-        message={messageInfo ? messageInfo.message : undefined}
-        action={
-          <React.Fragment>
-            <Link href="/dashboard/favorites">
-              <a>
-                <Button color="primary" size="small" onClick={handleClose}>
-                  View All
-                </Button>
-                <IconButton
-                  size="small"
-                  aria-label="close"
-                  color="inherit"
-                  onClick={handleClose}
-                >
-                  <CloseIcon fontSize="small" />
-                </IconButton>
-              </a>
-            </Link>
-          </React.Fragment>
-        }
-      />
+      {/* <Tooltip title={liked ? "Remove from Favorites" : "Add to Favorites"}> */}
+      <span style={{ marginLeft: mini ? "auto" : "initial" }}>
+        {likes > 0 ? (
+          <button
+            onClick={handleClick}
+            style={{
+              marginTop: mini ? "auto" : "8px",
+            }}
+          >
+            {mini ? likes : `Likes - ${likes} `}
+          </button>
+        ) : (
+          <button
+            onClick={handleClick}
+            style={{ marginTop: mini ? "auto" : "8px" }}
+          >
+            -
+          </button>
+        )}
+      </span>
+      {/* </Tooltip> */}
     </>
   );
 };

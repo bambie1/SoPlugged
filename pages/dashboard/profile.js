@@ -2,8 +2,6 @@ import React from "react";
 import Profile from "@components/dashboard/Profile";
 import DashboardLayout from "@components/dashboard/DashboardLayout";
 import { editUser, addUser, getUser } from "src/handleDBUser";
-import { Snackbar, IconButton } from "@material/mui-components";
-import { CloseIcon } from "@material/mui-icons";
 import nookies from "nookies";
 import { verifyIdToken } from "../../utils/firebaseAdmin";
 
@@ -27,26 +25,6 @@ const ProfilePage = ({ user, token, email }) => {
       <DashboardLayout title="My Profile | SoPlugged" position={2}>
         <Profile user={user} email={email} submitHandler={handleSubmit} />
       </DashboardLayout>
-      <Snackbar
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-        open={open}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        message="User Profile updated"
-        action={
-          <IconButton
-            size="small"
-            aria-label="close"
-            color="inherit"
-            onClick={handleClose}
-          >
-            <CloseIcon fontSize="small" />
-          </IconButton>
-        }
-      />
     </>
   );
 };

@@ -12,11 +12,9 @@ import algoliasearch from "algoliasearch/lite";
 import AlgoliaHit from "./AlgoliaHit";
 import { CustomRefinementList } from "./CustomRefinementList";
 import CustomRefinements from "./CustomRefinements";
-import { useMediaQuery, Container, Button } from "@material/mui-components";
 import { useSearch } from "@contexts/searchContext";
 import * as styles from "styles/Directory.module.scss";
 import { CustomPagination } from "./CustomPagination";
-import { ExpandLessIcon, ExpandMoreIcon } from "@material/mui-icons";
 
 const searchClient = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_ID,
@@ -24,7 +22,7 @@ const searchClient = algoliasearch(
 );
 
 const AlgoliaSearch = () => {
-  const tabletAndUp = useMediaQuery("(min-width:768px)");
+  const tabletAndUp = true;
   const { contextCategory } = useSearch();
   const [currentDropDown, setCurrentDropDown] = useState(0); //0, for no dropdowns
 
@@ -47,7 +45,7 @@ const AlgoliaSearch = () => {
             <SearchBox defaultRefinement={contextCategory} autoFocus />
             <div className={styles.search_filters}>
               {filters.map((item, index) => (
-                <Button
+                <button
                   key={item.label}
                   className="refinementMobile"
                   onClick={() =>
@@ -55,19 +53,9 @@ const AlgoliaSearch = () => {
                       ? setCurrentDropDown(index + 1)
                       : setCurrentDropDown(0)
                   }
-                  variant={
-                    currentDropDown === index + 1 ? "contained" : "outlined"
-                  }
-                  color={"secondary"}
-                  size="small"
                 >
                   {item.label}
-                  {currentDropDown === index + 1 ? (
-                    <ExpandLessIcon />
-                  ) : (
-                    <ExpandMoreIcon />
-                  )}
-                </Button>
+                </button>
               ))}
             </div>
           </div>
@@ -82,17 +70,16 @@ const AlgoliaSearch = () => {
             />
           ))}
           <Configure hitsPerPage={12} />
-          <Container maxWidth="lg">
-            <div>
-              <ClearRefinements />
-              {tabletAndUp && <CustomRefinements clearsQuery />}
-            </div>
 
-            <div className="cover"></div>
-            <Stats />
-            <Hits hitComponent={AlgoliaHit} />
-            <CustomPagination />
-          </Container>
+          <div>
+            <ClearRefinements />
+            {tabletAndUp && <CustomRefinements clearsQuery />}
+          </div>
+
+          <div className="cover"></div>
+          <Stats />
+          <Hits hitComponent={AlgoliaHit} />
+          <CustomPagination />
         </InstantSearch>
       </div>
     </>

@@ -1,22 +1,14 @@
 import React, { useState } from "react";
-import { Typography, useMediaQuery } from "@material/mui-components";
 import BusinessFormStep1 from "./BusinessFormStep1";
 import BusinessFormStep2 from "./BusinessFormStep2";
 import BusinessFormStep3 from "./BusinessFormStep3";
 import BusinessFormStep4 from "./BusinessFormStep4";
-import { useTheme } from "@material-ui/core/styles";
 import { useBusinessFormContext } from "@contexts/businessFormContext";
 import FormikStepper from "./FormikStepper";
 import BusinessFormReview from "./BusinessFormReview";
-import dynamic from "next/dynamic";
 import swal from "sweetalert";
 import { submitBusinessObject } from "../../src/updateBusiness";
 import { useRouter } from "next/router";
-
-const DynamicSaveAnimation = dynamic(() => import("../SavingAnimation"));
-const DynamicAlert = dynamic(() =>
-  import("@material/mui-lab").then((mod) => mod.Alert)
-);
 
 const MultiStepBusinessForm = ({ token }) => {
   const {
@@ -26,8 +18,6 @@ const MultiStepBusinessForm = ({ token }) => {
     backEndReferral,
     backEndReferralBusiness,
   } = useBusinessFormContext();
-  const theme = useTheme();
-  const bigScreen = useMediaQuery(theme.breakpoints.up("md"));
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(false);
   const router = useRouter();
@@ -83,8 +73,7 @@ const MultiStepBusinessForm = ({ token }) => {
               swal({
                 icon: "success",
                 title: "What next?",
-                text:
-                  "We'll send you a confirmation email shortly.\n\n In the meantime, we'll review your new business, and it will be added to our directory once ready.",
+                text: "We'll send you a confirmation email shortly.\n\n In the meantime, we'll review your new business, and it will be added to our directory once ready.",
                 button: "View Page",
               }).then((val) => {
                 if (val) router.push(`/business/${slug}`);
@@ -104,19 +93,17 @@ const MultiStepBusinessForm = ({ token }) => {
 
   return (
     <>
-      {bigScreen && (
+      {
         <>
-          <Typography variant="h6" gutterBottom={true} align="center">
-            {formSteps[currentStep]?.title}
-          </Typography>
+          <h6>{formSteps[currentStep]?.title}</h6>
           <hr style={{ width: "20%" }}></hr>
         </>
-      )}
+      }
       {error && (
-        <DynamicAlert severity="error" style={{ fontSize: "0.8rem" }}>
+        <p style={{ fontSize: "0.8rem" }}>
           An error occured while saving. Another business likely exists with the
           same name, or your request timed out (try refreshing the page)
-        </DynamicAlert>
+        </p>
       )}
       <FormikStepper
         initialValues={initialValues}
@@ -130,7 +117,6 @@ const MultiStepBusinessForm = ({ token }) => {
         <BusinessFormStep4 label="Images" />
         <BusinessFormReview label="Review and Submit" />
       </FormikStepper>
-      {saving && <DynamicSaveAnimation message="Updating your Business page" />}
     </>
   );
 };

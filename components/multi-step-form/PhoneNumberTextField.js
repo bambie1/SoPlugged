@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { CustomTextField } from "@material/mui-components";
 import { useField } from "formik";
 import { useFormikContext } from "formik";
 
@@ -25,15 +24,7 @@ const PhoneNumberTextField = () => {
     configTextField.error = true;
     configTextField.helperText = meta.error;
   }
-  return (
-    <CustomTextField
-      type="tel"
-      // value={formattedNumber}
-      // onChange={handlePhoneNumber}
-      {...configTextField}
-      margin="normal"
-    />
-  );
+  return <input type="tel" />;
 };
 
 export default PhoneNumberTextField;

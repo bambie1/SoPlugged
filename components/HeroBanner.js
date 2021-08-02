@@ -1,5 +1,3 @@
-import { Typography } from "@material/mui-components";
-import { SearchIcon } from "@material/mui-icons";
 import Link from "next/link";
 import styles from "styles/Hero.module.scss";
 
@@ -7,17 +5,16 @@ const HeroBanner = () => {
   return (
     <section className={styles.hero}>
       <div className={styles.hero_content}>
-        <Typography variant="h1">
+        <h1>
           You have needs, <br className={styles.line_break} /> we have
           <br />
           <span className={styles.black_owned}>BLACK-OWNED</span> Businesses
-        </Typography>
+        </h1>
 
         <Link href="/search">
           <a className={styles.hero_cta_link}>
             <div className={styles.hero_cta_button}>
-              <SearchIcon />
-              <Typography>Try "hair", or "food"</Typography>
+              <p>Try "hair", or "food"</p>
             </div>
           </a>
         </Link>

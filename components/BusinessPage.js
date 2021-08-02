@@ -1,25 +1,6 @@
-import {
-  Grid,
-  Typography,
-  Avatar,
-  makeStyles,
-  Box,
-  Fab,
-  IconButton,
-  Tooltip,
-  Button,
-} from "@material/mui-components";
 import React from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import {
-  CheckIcon,
-  InstagramIcon,
-  LanguageIcon,
-  EditIcon,
-  TelegramIcon,
-  CallIcon,
-  ErrorOutlineIcon,
-} from "@material/mui-icons";
+
 import ImageGallery from "react-image-gallery";
 import { useSearch } from "@contexts/searchContext";
 import { useRouter } from "next/router";
@@ -30,76 +11,7 @@ import dynamic from "next/dynamic";
 const DynamicContact = dynamic(() => import("./ContactForm"));
 const DynamicFavorite = dynamic(() => import("./FavoriteButton"));
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    position: "relative",
-    "& > *": {
-      marginTop: "8px",
-      marginBottom: "8px",
-    },
-  },
-  businessName: {
-    fontWeight: "normal",
-    wordBreak: "break-word",
-    margin: 0,
-  },
-  button: {
-    margin: "8px 16px",
-    border: `1px solid ${theme.palette.secondary.main}`,
-    borderRadius: "50%",
-  },
-  sectionTitle: {
-    width: "100%",
-    textAlign: "center",
-    margin: "8px auto",
-    maxWidth: "500px",
-    fontWeight: "bold",
-  },
-  categorySpan: {
-    cursor: "pointer",
-    borderBottom: "1px solid",
-    borderRadius: "5px",
-    padding: "1px",
-    color: theme.palette.secondary.main,
-    "&:hover": {
-      borderBottom: "none",
-    },
-  },
-  favoriteDiv: {
-    padding: "8px 40px 0px",
-    display: "flex",
-    flexDirection: "column",
-  },
-  remote: {
-    fontWeight: "bold",
-    fontSize: "0.9rem",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  unverified: {
-    marginTop: "8px",
-    fontSize: "0.9rem",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    color: "grey",
-  },
-  description: {
-    lineHeight: "1.5",
-    "& > ul": {
-      display: "table",
-      margin: "auto",
-    },
-    "& > ol": {
-      display: "table",
-      margin: "auto",
-    },
-  },
-}));
-
 const BusinessPage = ({ business, user }) => {
-  const classes = useStyles();
   const { setContextCategory } = useSearch();
   const router = useRouter();
 
@@ -132,52 +44,32 @@ const BusinessPage = ({ business, user }) => {
   };
 
   return (
-    <div className={classes.root}>
+    <div>
       <BusinessHeader wrap={true}>
-        <Avatar
-          alt="Business Logo"
-          src={logo_url}
-          style={{ margin: "0px 8px" }}
-        >
-          {business_name.toUpperCase().charAt(0)}
-        </Avatar>
         <div>
-          <Typography variant="h1" className={classes.businessName}>
-            {business_name.toUpperCase()}
-          </Typography>
+          <h1>{business_name.toUpperCase()}</h1>
         </div>
       </BusinessHeader>
       {!verified && (
-        <span className={classes.unverified}>
-          <ErrorOutlineIcon fontSize="small" style={{ height: "0.9rem" }} />
-          This business hasn't been claimed by it's owner
-        </span>
+        <span>This business hasn't been claimed by it's owner</span>
       )}
 
       {category && (
-        <Typography variant="h6" gutterBottom={true}>
-          CATEGORY:{" "}
-          <span className={classes.categorySpan} onClick={handleCategoryClick}>
-            {category}
-          </span>
-        </Typography>
+        <h6>
+          CATEGORY: <span onClick={handleCategoryClick}>{category}</span>
+        </h6>
       )}
 
-      <Typography variant="body1">
+      <p>
         {street_address &&
           fixed_to_one_location &&
           `LOCATION: ${street_address}`}
         {street_address && fixed_to_one_location && <br></br>}
         {business_location}
-        {!fixed_to_one_location && (
-          <span className={classes.remote}>
-            <CheckIcon fontSize="small" style={{ height: "0.9rem" }} />
-            CANADA-WIDE
-          </span>
-        )}
-      </Typography>
-      <Grid container spacing={2} style={{ marginTop: "30px" }}>
-        <Grid item xs={12} md={7}>
+        {!fixed_to_one_location && <span>CANADA-WIDE</span>}
+      </p>
+      <div>
+        <div>
           <div
             style={{
               display: "flex",
@@ -195,11 +87,10 @@ const BusinessPage = ({ business, user }) => {
             )}
             {business_description && (
               <>
-                <Typography variant="body1" className={classes.sectionTitle}>
+                <p>
                   <span>ABOUT BUSINESS:</span>
-                </Typography>
+                </p>
                 <div
-                  className={classes.description}
                   dangerouslySetInnerHTML={{ __html: business_description }}
                 ></div>
                 <br></br>
@@ -215,9 +106,7 @@ const BusinessPage = ({ business, user }) => {
                   background: "#fffaf2",
                 }}
               >
-                <Typography>
-                  Would you recommend this business? Give it a like!
-                </Typography>
+                <p>Would you recommend this business? Give it a like!</p>
                 <br></br>
                 <DynamicFavorite
                   business_id={id}
@@ -228,33 +117,16 @@ const BusinessPage = ({ business, user }) => {
               </div>
             )}
           </div>
-        </Grid>
-        <Grid id="contact" item xs={12} md={5}>
-          <Typography variant="body1" className={classes.sectionTitle}>
+        </div>
+        <div id="contact">
+          <p>
             <span>CONTACT BUSINESS</span>
-          </Typography>
-          <Box display="flex" justifyContent="center" flexWrap="wrap">
-            {phone_number && (
-              <a href={`tel:${phone_number}`} className={classes.button}>
-                <Tooltip title="Call Business" aria-label="call business">
-                  <IconButton>
-                    <CallIcon />
-                  </IconButton>
-                </Tooltip>
-              </a>
-            )}
+          </p>
+          <div>
+            {phone_number && <a href={`tel:${phone_number}`}>Call</a>}
             {business_url && (
-              <a
-                href={business_url}
-                target="_blank"
-                rel="noopener"
-                className={classes.button}
-              >
-                <Tooltip title="Visit Website" aria-label="visit website">
-                  <IconButton>
-                    <LanguageIcon />
-                  </IconButton>
-                </Tooltip>
+              <a href={business_url} target="_blank" rel="noopener">
+                website
               </a>
             )}
             {ig_handle && (
@@ -262,26 +134,19 @@ const BusinessPage = ({ business, user }) => {
                 href={`https://www.instagram.com/${ig_handle}`}
                 target="_blank"
                 rel="noopener"
-                className={classes.button}
               >
-                <Tooltip title="View IG page" aria-label="view IG page">
-                  <IconButton>
-                    <InstagramIcon />
-                  </IconButton>
-                </Tooltip>
+                IG
               </a>
             )}
-          </Box>
+          </div>
           {verified && (
             <DynamicContact user={user} business_email={creator.email} />
           )}
-        </Grid>
-      </Grid>
+        </div>
+      </div>
       {hasPreview && verified && (
-        <div className={classes.favoriteDiv}>
-          <Typography>
-            Would you recommend this business? Give it a like!
-          </Typography>
+        <div>
+          <p>Would you recommend this business? Give it a like!</p>
           <DynamicFavorite
             business_id={id}
             user={user}
@@ -299,29 +164,22 @@ const BusinessPage = ({ business, user }) => {
             display: "inline-block",
           }}
         >
-          <Typography>Are you the owner of this business?</Typography>
+          <p>Are you the owner of this business?</p>
           <a href="mailto:hello@soplugged.com">
-            <Button color="secondary">Let us know</Button>
+            <button>Let us know</button>
           </a>
         </div>
       )}
       {pageOwner ? (
         <Link href="/my-business">
-          <a style={{ position: "fixed", top: "65px", right: "16px" }}>
-            <Fab variant="extended">
-              <EditIcon style={{ marginRight: "8px" }} />
-              Edit
-            </Fab>
-          </a>
+          <a style={{ position: "fixed", top: "65px", right: "16px" }}>Edit</a>
         </Link>
       ) : (
         <a
           href="#contact"
           style={{ position: "fixed", bottom: "0px", right: "16px" }}
         >
-          <Fab color="secondary">
-            <TelegramIcon style={{ marginRight: "8px" }} />
-          </Fab>
+          Contact
         </a>
       )}
     </div>

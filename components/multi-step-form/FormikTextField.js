@@ -1,5 +1,4 @@
 import React from "react";
-import { TextField, CustomTextField } from "@material/mui-components";
 import { useField } from "formik";
 
 const FormikTextField = ({ name, handleChange, ...otherProps }) => {
@@ -16,7 +15,7 @@ const FormikTextField = ({ name, handleChange, ...otherProps }) => {
     configTextField.error = true;
     configTextField.helperText = meta.error;
   }
-  return <CustomTextField {...configTextField} margin="normal" />;
+  return <input placeholder="formik text field" />;
 };
 
 export default FormikTextField;

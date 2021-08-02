@@ -1,11 +1,9 @@
 import React from "react";
 import FirebaseAuth from "../components/FirebaseAuth";
-import { Button, Typography, Container } from "@material/mui-components";
 import Link from "next/link";
 import SEO from "@components/SEO";
 import nookies from "nookies";
 import { verifyIdToken } from "../utils/firebaseAdmin";
-import { NavigateBeforeIcon } from "@components/material-ui/mui-icons";
 import Image from "next/image";
 import styles from "styles/Join.module.scss";
 
@@ -17,7 +15,7 @@ const Join = ({ referrer }) => {
         title="Join SoPlugged"
       />
       <div className={styles.page}>
-        <Container maxWidth="sm" className={styles.container}>
+        <div className={styles.container}>
           <div className={styles.logo_circle}>
             <Image
               src="/soplugged-logo.png"
@@ -26,27 +24,21 @@ const Join = ({ referrer }) => {
               height={60}
             />
           </div>
-          <Typography variant="h1">Join SoPlugged</Typography>
-          <Typography variant="body1">
+          <h1>Join SoPlugged</h1>
+          <p>
             Please verify your identity via one of the following sign-in
             methods:
-          </Typography>
+          </p>
           <div className={styles.firebase_auth_paper}>
             <FirebaseAuth referrer={referrer} />
           </div>
           <hr style={{ width: "30%", margin: " 16px auto" }} />
           <Link href="/search">
             <a className={styles.back_to_directory_btn}>
-              <Button
-                variant="contained"
-                color="secondary"
-                startIcon={<NavigateBeforeIcon />}
-              >
-                I'm just browsing
-              </Button>
+              <button>I'm just browsing</button>
             </a>
           </Link>
-        </Container>
+        </div>
       </div>
     </>
   );

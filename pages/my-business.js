@@ -1,23 +1,11 @@
 import React, { useState } from "react";
-import { Container, makeStyles } from "@material/mui-components";
 import SEO from "@components/SEO";
 import nookies from "nookies";
 import { verifyIdToken } from "../utils/firebaseAdmin";
 import { useBusinessFormContext } from "@contexts/businessFormContext";
 import StyledBusinessForm from "@components/multi-step-form/StyledBusinessForm";
 
-const useStyles = makeStyles((theme) => ({
-  container: {
-    padding: theme.spacing(10, 0),
-    zIndex: "1",
-    background: "white",
-    display: "flex",
-    placeContent: "center",
-  },
-}));
-
 const EditBusiness = ({ business, token }) => {
-  const classes = useStyles();
   const { setBusiness } = useBusinessFormContext();
 
   React.useEffect(() => {
@@ -32,9 +20,9 @@ const EditBusiness = ({ business, token }) => {
           description="Register your business as an Black entrepreneur, and get featured on our platform, for FREE!"
           title="My Business | SoPlugged"
         />
-        <Container maxWidth="lg" className={classes.container}>
+        <div>
           <StyledBusinessForm myBusiness={business} token={token} />
-        </Container>
+        </div>
       </>
     );
   } else {

@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  Checkbox,
-  FormControlLabel,
-  FormControl,
-  FormLabel,
-  FormGroup,
-} from "@material/mui-components";
+
 import { useField, useFormikContext } from "formik";
 import { useBusinessFormContext } from "@contexts/businessFormContext";
 
@@ -34,17 +28,7 @@ const FormikCheckbox = ({ name, label, legend, ...otherProps }) => {
     configFormControl.error = true;
     configFormControl.helperText = meta.error;
   }
-  return (
-    <FormControl {...configFormControl} margin="normal">
-      <FormLabel component="legend">{legend}</FormLabel>
-      <FormGroup>
-        <FormControlLabel
-          control={<Checkbox {...configCheckbox} />}
-          label={label}
-        />
-      </FormGroup>
-    </FormControl>
-  );
+  return <input type="checkbox" />;
 };
 
 export default FormikCheckbox;

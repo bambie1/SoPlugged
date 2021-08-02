@@ -1,62 +1,10 @@
 import React from "react";
-import {
-  makeStyles,
-  Button,
-  Box,
-  Typography,
-  useMediaQuery,
-} from "@material/mui-components";
-import { useTheme } from "@material-ui/core/styles";
 import { useBusinessFormContext } from "@contexts/businessFormContext";
 import Image from "next/image";
 import { Form, Formik } from "formik";
 import validationSchema from "./validationSchema";
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    padding: "8px",
-    [theme.breakpoints.up("sm")]: {
-      padding: "16px",
-    },
-  },
-  decorImage: {
-    textAlign: "center",
-    opacity: "0.5",
-    borderTop: `0.5px solid ${theme.palette.primary.main}`,
-    maxWidth: "450px",
-    margin: "auto",
-  },
-  form: {
-    width: "700px",
-    maxWidth: "100%",
-    margin: "0px auto",
-  },
-  buttonGroup: {
-    position: "absolute",
-    bottom: "0",
-    left: "0",
-    width: "100%",
-    background: "#fffaf2",
-    borderTop: `1px solid ${theme.palette.primary.main}`,
-    display: "flex",
-    justifyContent: "space-between",
-    zIndex: "1",
-    "& > *": {
-      margin: "8px",
-    },
-  },
-  laptopBtnGroup: {
-    marginTop: "20px",
-  },
-  buttons: {
-    margin: "0px 8px",
-  },
-}));
-
 const FormikStepper = ({ children, ...props }) => {
-  const theme = useTheme();
-  const bigScreen = useMediaQuery(theme.breakpoints.up("md"));
-  const classes = useStyles(bigScreen);
   const steps = React.Children.toArray(children);
   const {
     formSteps,
@@ -103,43 +51,25 @@ const FormikStepper = ({ children, ...props }) => {
       validationSchema={validationSchema[currentStep]}
       onSubmit={handleSubmit}
     >
-      <Form
-        className={classes.form}
-        onChange={(val) => setFormWasChanged(true)}
-      >
-        <Box my={1}>{currentChild}</Box>
+      <Form onChange={(val) => setFormWasChanged(true)}>
+        <div>{currentChild}</div>
 
-        <div
-          className={!bigScreen ? classes.buttonGroup : classes.laptopBtnGroup}
-        >
-          <Button
-            disabled={currentStep === 0}
-            color="secondary"
-            variant="outlined"
-            onClick={handleBack}
-            className={bigScreen ? classes.buttons : undefined}
-          >
+        <div>
+          <button disabled={currentStep === 0} onClick={handleBack}>
             Back
-          </Button>
-          {!bigScreen && (
-            <Typography>{`Step ${currentStep + 1} / ${
-              formSteps.length
-            }`}</Typography>
-          )}
+          </button>
+          {<p>{`Step ${currentStep + 1} / ${formSteps.length}`}</p>}
 
-          <Button
-            variant="contained"
-            color="secondary"
+          <button
             type="submit"
-            className={bigScreen ? classes.buttons : ""}
             disabled={currentStep === steps.length - 1 && !formWasChanged}
           >
             {currentStep === steps.length - 1 ? "Submit" : "Next"}
-          </Button>
+          </button>
         </div>
 
-        {formSteps[currentStep].bottomImage && !bigScreen && (
-          <div className={classes.decorImage}>
+        {formSteps[currentStep].bottomImage && (
+          <div>
             <Image
               src={formSteps[currentStep].bottomImage}
               width={400}

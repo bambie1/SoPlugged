@@ -1,16 +1,13 @@
 import React, { useEffect } from "react";
 import Layout from "../components/Layout";
-import "../styles/_globals.css";
-import "../styles/_algolia.css";
-import "../styles/_animation.css";
-import { ThemeProvider } from "@material-ui/core/styles";
-import { theme } from "../src/theme";
+import "styles/_globals.css";
+import "styles/_algolia.css";
+import "styles/_animation.css";
 import { SearchProvider } from "@contexts/searchContext";
 import { BusinessFormProvider } from "@contexts/businessFormContext";
 import { AuthProvider } from "@contexts/authContext";
 import { useRouter } from "next/router";
 import { init } from "../utils/sentry";
-import SavingAnimation from "@components/SavingAnimation";
 
 init();
 
@@ -37,18 +34,15 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <AuthProvider>
-          <SearchProvider>
-            <BusinessFormProvider>
-              <Layout>
-                {loading && <SavingAnimation message="Coming right up" />}
-                <Component {...pageProps} />
-              </Layout>
-            </BusinessFormProvider>
-          </SearchProvider>
-        </AuthProvider>
-      </ThemeProvider>
+      <AuthProvider>
+        <SearchProvider>
+          <BusinessFormProvider>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </BusinessFormProvider>
+        </SearchProvider>
+      </AuthProvider>
     </>
   );
 }

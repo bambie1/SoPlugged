@@ -1,33 +1,11 @@
 import React from "react";
-import { Button, Container, makeStyles } from "@material/mui-components";
 import SEO from "@components/SEO";
 import BusinessPage from "@components/BusinessPage";
 import { useAuth } from "@contexts/authContext";
 import { useSearch } from "@contexts/searchContext";
 import { useRouter } from "next/router";
 
-const useStyles = makeStyles((theme) => ({
-  page: {
-    textAlign: "center",
-    // paddingTop: "60px",
-    minHeight: "80vh",
-    zIndex: "1",
-    background: "white",
-  },
-  buttonDiv: {
-    display: "flex",
-    maxWidth: "400px",
-    margin: "10px auto",
-    justifyContent: "center",
-    borderTop: "1px solid",
-    "& > *": {
-      margin: "8px 16px",
-    },
-  },
-}));
-
 const BusinessSlug = ({ business }) => {
-  const classes = useStyles();
   const { user } = useAuth();
   const router = useRouter();
   const { setContextCategory } = useSearch();
@@ -45,17 +23,17 @@ const BusinessSlug = ({ business }) => {
         }`}
         title={`${business?.business_name.toUpperCase() || ""} | SoPlugged`}
       />
-      <Container className={classes.page} maxWidth="lg">
+      <div>
         <br></br>
         {business && <BusinessPage business={business} user={user} />}
-        <div className={classes.buttonDiv}>
-          <Button variant="contained" color="secondary" onClick={backToSearch}>
+        <div>
+          <button onClick={backToSearch}>
             {business?.category
               ? "View business like this"
               : "Back to directory"}
-          </Button>
+          </button>
         </div>
-      </Container>
+      </div>
     </>
   );
 };

@@ -31,11 +31,6 @@ a {
   color: inherit;
   text-decoration: none;
 }
-
-fieldset {
-  border: none;
-  outline: none;
-}
 * {
   box-sizing: border-box;
 }
@@ -68,66 +63,6 @@ img {
   display: flex;
   flex-direction: column;
 }
-
-.line {
-  position: absolute;
-  width: 5px;
-  height: 100%;
-  top: 0;
-  left: 50%;
-  transform: rotate(30deg);
-  overflow: hidden;
-}
-.line::after {
-  content: "";
-  display: block;
-  position: absolute;
-  height: 15vh;
-  width: 100%;
-  top: -50%;
-  left: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0) 0%,
-    #ffffff 75%,
-    #ffffff 100%
-  );
-  animation: drop 7s 0s infinite;
-  animation-fill-mode: forwards;
-  animation-timing-function: cubic-bezier(0.4, 0.26, 0, 0.97);
-}
-.line:nth-child(1) {
-  margin-left: -25%;
-}
-
-.line:nth-child(1)::after {
-  animation-delay: 2s;
-}
-
-.line:nth-child(3) {
-  margin-left: 25%;
-}
-.line:nth-child(3)::after {
-  animation-delay: 2.5s;
-}
-@keyframes drop {
-  0% {
-    top: -50%;
-  }
-  100% {
-    top: 110%;
-  }
-}
-
-.gap {
-  flex-grow: 1;
-}
-.sectionDesktop {
-  display: none;
-}
-.sectionMobile {
-  display: flex;
-}
 .business-image {
   border: 1px solid var(--light);
   max-height: 350px;
@@ -155,9 +90,6 @@ img {
 }
 .carousel.carousel-slider .control-arrow {
   background: #cdb693 !important;
-}
-.MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorRight.MuiPaper-elevation16 {
-  background: #fffaf2;
 }
 .backdrop {
   position: fixed;
@@ -221,27 +153,6 @@ img {
 .image-gallery-thumbnail:focus {
   border-color: var(--dark);
 }
-.categoryIcon {
-  cursor: pointer;
-  transition: 1s;
-  opacity: 0.5;
-}
-.categoryIcon:hover {
-  opacity: 1;
-}
-
-@media only screen and (min-width: 600px) {
-  .sectionMobile {
-    display: none;
-  }
-  .sectionDesktop {
-    display: flex;
-    align-items: center;
-  }
-  .sectionDesktop > * {
-    margin: 0 8px;
-  }
-}
 
 .firebaseui-container * {
   font-family: "Raleway";
@@ -272,13 +183,6 @@ img {
 }
 .ql-snow {
   border-radius: 4px !important;
-}
-
-/* stepper */
-@media screen and (max-width: 700px) {
-  .MuiStepper-root {
-    padding: 24px 0px !important;
-  }
 }
 
 /* shopify iframe over loading spinner */
